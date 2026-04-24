@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Narrows — Trade Risk Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1698 948'%3E%3Crect width='1698' height='948' fill='%230A2540'/%3E%3Cpath fill='%23F0B429' d='M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z'/%3E%3C/svg%3E">
+
+<style>
+/* ============================================================
+   NARROWS — CSS DESIGN TOKENS
+   Edit only this block to retheme the entire page.
+   ============================================================ */
+:root {
+  --white:          #FFFFFF;
+  --page-bg:        #FFFFFF;
+  --surface:        #F6F8FB;
+  --border:         #E4EAF2;
+  --navy:           #0A2540;
+  --blue:           #1565A8;
+  --blue-light:     #2E86D4;
+  --blue-pale:      #EAF3FB;
+  --gold:           #F0B429;
+  --gold-pale:      #FEF9EC;
+  --text-primary:   #0A2540;
+  --text-secondary: #4A6078;
+  --text-tertiary:  #8FA5BB;
+  --font: 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
+  --s1:.5rem; --s2:1rem; --s3:1.5rem; --s4:2rem; --s5:3rem; --s6:5rem;
+  --rule-gold:  2px solid var(--gold);
+  --rule-light: 1px solid var(--border);
+  --max-w: 1120px;
+  --ease: cubic-bezier(0.16,1,0.3,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--page-bg);color:var(--text-primary);font-family:var(--font);font-weight:300;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:var(--rule-light);padding:0 var(--s4);}
+.nav-inner{max-width:var(--max-w);margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-mark{width:28px;height:auto;display:block;}
+.nav-logo-mark path{fill:var(--navy);}
+.nav-logo-word{font-size:17px;font-weight:700;color:var(--navy);letter-spacing:0.06em;text-transform:uppercase;}
+.nav-logo .dot{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:var(--s4);list-style:none;}
+.nav-links a{font-size:13px;font-weight:400;color:var(--text-secondary);text-decoration:none;letter-spacing:0.04em;transition:color 0.15s;}
+.nav-links a:hover{color:var(--navy);}
+.nav-cta{font-size:13px!important;font-weight:600!important;color:var(--white)!important;background:var(--blue);padding:9px 20px;border-radius:4px;transition:background 0.15s!important;letter-spacing:0!important;}
+.nav-cta:hover{background:var(--navy)!important;}
+
+/* HERO */
+.hero{padding:128px var(--s4) var(--s6);max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1fr 400px;gap:80px;align-items:start;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:var(--s2);}
+.eyebrow::before{content:'';width:20px;height:2px;background:var(--gold);display:inline-block;}
+.hero-headline{font-size:clamp(34px,4.5vw,54px);font-weight:700;line-height:1.1;color:var(--navy);margin-bottom:var(--s3);letter-spacing:-0.02em;}
+.hero-headline em{font-style:italic;font-weight:400;color:var(--blue-light);}
+.hero-sub{font-size:17px;color:var(--text-secondary);max-width:480px;line-height:1.75;margin-bottom:var(--s4);font-weight:300;}
+.hero-sub strong{color:var(--text-primary);font-weight:500;}
+.hero-actions{display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap;}
+
+/* BUTTONS */
+.btn{display:inline-block;font-family:var(--font);font-size:13px;font-weight:600;letter-spacing:0.04em;text-decoration:none;padding:13px 26px;border:none;border-radius:4px;cursor:pointer;transition:background 0.15s,transform 0.12s;}
+.btn:hover{transform:translateY(-1px);}
+.btn-navy{background:var(--navy);color:var(--white);}
+.btn-navy:hover{background:#0d304f;}
+.btn-blue{background:var(--blue);color:var(--white);}
+.btn-blue:hover{background:var(--navy);}
+.btn-gold{background:var(--gold);color:var(--navy);}
+.btn-gold:hover{background:#dea020;}
+.btn-ghost{display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-size:13px;font-weight:500;letter-spacing:0.04em;text-decoration:none;transition:color 0.15s,gap 0.15s;}
+.btn-ghost::after{content:'→';transition:transform 0.15s var(--ease);}
+.btn-ghost:hover{color:var(--navy);gap:10px;}
+
+/* STAT CARD */
+.stat-card{background:var(--white);border:var(--rule-light);border-radius:8px;overflow:hidden;box-shadow:0 4px 24px rgba(10,37,64,0.08);}
+.stat-card-header{background:var(--navy);padding:16px 20px;border-bottom:3px solid var(--gold);}
+.stat-card-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:4px;}
+.stat-card-scenario{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.5;}
+.stat-card-scenario strong{color:var(--gold);font-weight:600;}
+.stat-row{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:var(--rule-light);}
+.stat-row:last-child{border-bottom:none;}
+.stat-row-label{font-size:12px;color:var(--text-secondary);font-weight:400;}
+.stat-row-value{font-size:22px;font-weight:700;color:var(--navy);letter-spacing:-0.01em;}
+.stat-row-value .unit{font-size:12px;font-weight:400;color:var(--text-tertiary);margin-left:3px;}
+
+/* SECTIONS */
+.wrap{padding:var(--s6) var(--s4);max-width:var(--max-w);margin:0 auto;}
+.surface{background:var(--surface);}
+.section-title{font-size:clamp(26px,3vw,38px);font-weight:700;color:var(--navy);line-height:1.15;letter-spacing:-0.02em;margin-bottom:var(--s3);max-width:680px;}
+.section-lead{font-size:16px;color:var(--text-secondary);max-width:580px;line-height:1.75;margin-bottom:var(--s5);font-weight:300;}
+hr.div{border:none;border-top:var(--rule-light);margin:0;}
+
+/* OUTPUT CARDS */
+.output-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);margin-bottom:var(--s5);}
+.output-card{background:var(--white);border:var(--rule-light);border-top:3px solid var(--gold);border-radius:0 0 6px 6px;padding:var(--s3) var(--s3) var(--s4);transition:transform 0.2s var(--ease),box-shadow 0.2s;}
+.output-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(10,37,64,0.08);}
+.output-card-num{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--s2);}
+.output-card-title{font-size:19px;font-weight:700;color:var(--navy);margin-bottom:var(--s2);line-height:1.2;}
+.output-card-body{font-size:14px;color:var(--text-secondary);line-height:1.65;margin-bottom:var(--s3);font-weight:300;}
+.output-card-eg{font-size:12px;color:var(--blue);background:var(--blue-pale);padding:10px 14px;border-radius:4px;line-height:1.55;}
+.output-card-eg strong{color:var(--navy);font-weight:600;display:block;margin-bottom:2px;}
+
+/* COVERAGE */
+.coverage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s3);}
+.cov-item{padding:var(--s3);border-left:3px solid var(--gold);border:var(--rule-light);border-left:3px solid var(--gold);background:var(--white);border-radius:0 4px 4px 0;}
+.cov-value{font-size:36px;font-weight:700;color:var(--navy);line-height:1;margin-bottom:6px;letter-spacing:-0.02em;}
+.cov-label{font-size:13px;color:var(--text-secondary);line-height:1.5;font-weight:300;}
+
+/* DISTINCTION */
+.distinction{background:var(--surface);padding:var(--s6) var(--s4);border-top:var(--rule-light);border-bottom:var(--rule-light);}
+.distinction-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.compare-table{width:100%;border-collapse:collapse;font-size:13px;background:var(--white);border-radius:6px;overflow:hidden;border:var(--rule-light);box-shadow:0 2px 12px rgba(10,37,64,0.05);}
+.compare-table thead{background:var(--navy);}
+.compare-table th{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:12px 16px;text-align:left;}
+.compare-table th:first-child{color:rgba(255,255,255,0.35);}
+.compare-table th:nth-child(2){color:rgba(255,255,255,0.55);}
+.compare-table th:nth-child(3){color:var(--gold);}
+.compare-table td{padding:11px 16px;border-bottom:var(--rule-light);vertical-align:top;line-height:1.5;}
+.compare-table td:first-child{color:var(--text-tertiary);font-size:12px;}
+.compare-table td:nth-child(2){color:var(--text-secondary);font-weight:300;}
+.compare-table td:nth-child(3){color:var(--navy);font-weight:500;}
+.compare-table tr:last-child td{border-bottom:none;}
+.compare-table tbody tr:hover td{background:var(--blue-pale);}
+
+/* LIVE MOMENT */
+.live-moment{padding:var(--s6) var(--s4);border-top:var(--rule-light);border-bottom:var(--rule-light);}
+.live-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.live-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);background:var(--gold-pale);border:1px solid rgba(240,180,41,0.4);padding:5px 14px;border-radius:20px;margin-bottom:var(--s3);}
+.live-tag::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+.live-title{font-size:clamp(22px,2.8vw,32px);font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:var(--s3);letter-spacing:-0.02em;}
+.live-body{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:var(--s3);font-weight:300;}
+.live-body strong{color:var(--text-primary);font-weight:600;}
+.live-stats{display:flex;flex-direction:column;gap:var(--s2);}
+.live-stat{display:flex;align-items:center;gap:20px;padding:var(--s2) var(--s3);background:var(--surface);border:var(--rule-light);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;}
+.live-stat-value{font-size:32px;font-weight:700;color:var(--navy);white-space:nowrap;letter-spacing:-0.02em;min-width:80px;}
+.live-stat-desc{font-size:13px;color:var(--text-secondary);line-height:1.5;font-weight:300;}
+.live-stat-desc strong{color:var(--text-primary);font-weight:600;display:block;margin-bottom:1px;}
+
+/* AUDIENCE */
+.audience-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s3);}
+.aud-card{background:var(--white);border:var(--rule-light);border-radius:6px;padding:var(--s3) var(--s4);transition:border-color 0.2s,box-shadow 0.2s;}
+.aud-card:hover{border-color:rgba(240,180,41,0.5);box-shadow:0 6px 24px rgba(10,37,64,0.06);}
+.aud-role{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:var(--s1);}
+.aud-title{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:var(--s2);line-height:1.2;letter-spacing:-0.01em;}
+.aud-body{font-size:14px;color:var(--text-secondary);line-height:1.65;margin-bottom:var(--s2);font-weight:300;}
+.aud-num{font-size:12px;font-weight:500;color:var(--blue);background:var(--blue-pale);padding:7px 12px;border-radius:4px;display:inline-block;line-height:1.4;}
+
+/* CTA */
+.cta-section{padding:var(--s6) var(--s4);max-width:var(--max-w);margin:0 auto;text-align:center;}
+.cta-title{font-size:clamp(26px,3.5vw,42px);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:var(--s3);letter-spacing:-0.02em;max-width:640px;margin-left:auto;margin-right:auto;}
+.cta-title em{font-style:italic;font-weight:400;color:var(--blue-light);}
+.cta-sub{font-size:16px;color:var(--text-secondary);max-width:460px;margin:0 auto var(--s4);line-height:1.7;font-weight:300;}
+.cta-form{display:flex;gap:var(--s2);justify-content:center;flex-wrap:wrap;margin-bottom:var(--s2);}
+.cta-input{font-family:var(--font);font-size:14px;font-weight:400;color:var(--text-primary);background:var(--white);border:var(--rule-light);border-radius:4px;padding:12px 18px;width:280px;outline:none;transition:border-color 0.15s,box-shadow 0.15s;}
+.cta-input::placeholder{color:var(--text-tertiary);}
+.cta-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(21,101,168,0.1);}
+.cta-note{font-size:12px;color:var(--text-tertiary);letter-spacing:0.02em;}
+
+/* FOOTER */
+footer{background:var(--navy);padding:var(--s5) var(--s4) var(--s4);}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:var(--s5);padding-bottom:var(--s4);border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:var(--s3);}
+.footer-logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:var(--s2);}
+.footer-logo-mark{width:28px;height:auto;display:block;}
+.footer-logo-mark path{fill:var(--white);}
+.footer-logo-word{font-size:17px;font-weight:700;color:var(--white);letter-spacing:0.06em;text-transform:uppercase;}
+.footer-logo .dot{color:var(--gold);}
+.footer-tagline{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.65;font-weight:300;}
+.footer-col-label{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--s2);}
+.footer-col-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.footer-col-links a{font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;font-weight:300;transition:color 0.15s;}
+.footer-col-links a:hover{color:var(--white);}
+.footer-bottom{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:rgba(255,255,255,0.25);font-weight:300;}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(16px);transition:opacity 0.55s var(--ease),transform 0.55s var(--ease);}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-up:nth-child(2){transition-delay:0.08s;}
+.fade-up:nth-child(3){transition-delay:0.16s;}
+.fade-up:nth-child(4){transition-delay:0.24s;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .output-grid,.audience-grid{grid-template-columns:1fr;}
+  .distinction-inner,.live-inner{grid-template-columns:1fr;gap:var(--s4);}
+  .coverage-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-inner{grid-template-columns:1fr;gap:var(--s3);}
+}
+@media(max-width:600px){
+  nav{padding:0 var(--s2);}
+  .nav-links{display:none;}
+  .hero{padding-top:96px;}
+  .coverage-grid{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <svg class="nav-logo-mark" viewBox="0 0 1698 948" xmlns="http://www.w3.org/2000/svg"><path d="M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z"/></svg>
+      <span class="nav-logo-word">NARROWS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#how-it-works">The model</a></li>
+      <li><a href="#for-whom">For whom</a></li>
+      <li><a href="#contact" class="nav-cta">Request demo</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="eyebrow">Trade Risk Intelligence</div>
+    <h1 class="hero-headline">
+      When a chokepoint closes,<br>
+      <em>who's exposed</em><br>
+      and by how much?
+    </h1>
+    <p class="hero-sub">
+      Narrows models bilateral seaborne trade dependency at the chokepoint level —
+      <strong>which countries, importing which commodities, through which corridors</strong> —
+      and quantifies the financial exposure if that corridor is disrupted.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-blue">Request a demo</a>
+      <a href="#how-it-works" class="btn-ghost">See how it works</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-card">
+      <div class="stat-card-header">
+        <div class="stat-card-eyebrow">Live scenario output</div>
+        <div class="stat-card-scenario">
+          <strong>Strait of Hormuz — 100% closure, 30 days</strong><br>
+          All commodities · Capacity sensitivity 1.00 · No alternative route
+        </div>
+      </div>
+      <div class="stat-row"><span class="stat-row-label">Value at risk</span><span class="stat-row-value">$13.8B<span class="unit">USD</span></span></div>
+      <div class="stat-row"><span class="stat-row-label">Countries exposed</span><span class="stat-row-value">9<span class="unit">nations</span></span></div>
+      <div class="stat-row"><span class="stat-row-label">China alone</span><span class="stat-row-value">$12.2B<span class="unit">USD</span></span></div>
+      <div class="stat-row"><span class="stat-row-label">VLCCs in-window</span><span class="stat-row-value">28<span class="unit">vessels</span></span></div>
+      <div class="stat-row"><span class="stat-row-label">Portfolio rerouting loss</span><span class="stat-row-value">$28M<span class="unit">overrun</span></span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="wrap">
+    <div class="eyebrow">What the model produces</div>
+    <h2 class="section-title">Three outputs. Every assumption adjustable.</h2>
+    <p class="section-lead">Built on UN Comtrade 2022 bilateral data. Every parameter — sensitivity scores, vessel rates, dependency percentages — can be substituted with your own inputs.</p>
+    <div class="output-grid">
+      <div class="output-card fade-up">
+        <div class="output-card-num">Output 01</div>
+        <h3 class="output-card-title">Value at risk</h3>
+        <p class="output-card-body">Dollar-denominated exposure by country and commodity under a user-defined chokepoint disruption. Severity and duration are variable. Capacity sensitivity is adjustable per chokepoint.</p>
+        <div class="output-card-eg"><strong>Malacca 100% / 14 days</strong>Japan: $1.6B iron ore · South Korea: $1.1B · China: $3.8B crude</div>
+      </div>
+      <div class="output-card fade-up">
+        <div class="output-card-num">Output 02</div>
+        <h3 class="output-card-title">Rerouting penalty</h3>
+        <p class="output-card-body">Per-voyage cost overrun by vessel class: extra days at sea, bunker and charter rate uplift, inventory carrying cost. Labelled by audience — underwriter, lender, cargo owner.</p>
+        <div class="output-card-eg"><strong>Suez closure — VLCC via Cape</strong>+14 days · $1.4M voyage overrun · $230k carrying cost per vessel</div>
+      </div>
+      <div class="output-card fade-up">
+        <div class="output-card-num">Output 03</div>
+        <h3 class="output-card-title">Fleet at risk</h3>
+        <p class="output-card-body">Vessels in-window during the disruption, cargo value on water at event onset, and total portfolio rerouting loss across the fleet. The accumulation number.</p>
+        <div class="output-card-eg"><strong>Hormuz 100% / 30 days</strong>28 VLCCs in-window · $3.4B cargo at risk · $28M portfolio overrun</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- COVERAGE -->
+<div class="surface">
+  <div class="wrap" style="padding-bottom:var(--s4)">
+    <div class="eyebrow">Model coverage</div>
+    <div class="coverage-grid">
+      <div class="cov-item fade-up"><div class="cov-value">22</div><div class="cov-label">Chokepoints across 4 categories — geometric straits, nodal hubs, corridor zones, infrastructure</div></div>
+      <div class="cov-item fade-up"><div class="cov-value">$804B</div><div class="cov-label">Trade value covered — 89.6% of the $897B seaborne universe in scope</div></div>
+      <div class="cov-item fade-up"><div class="cov-value">25</div><div class="cov-label">Importing countries with bilateral dependency matrices by commodity and corridor</div></div>
+      <div class="cov-item fade-up"><div class="cov-value">7</div><div class="cov-label">Commodity classes from crude petroleum to electronics — vessel-class specific routing</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- DISTINCTION -->
+<section class="distinction">
+  <div class="distinction-inner">
+    <div>
+      <div class="eyebrow">How Narrows is different</div>
+      <h2 class="section-title">PortWatch tells you a disruption is happening.<br>Narrows tells you what it costs.</h2>
+      <p class="section-lead">Existing tools measure throughput. Narrows measures exposure. The difference is a dollar figure a counterparty can act on.</p>
+      <a href="#contact" class="btn btn-blue">Request a demo</a>
+    </div>
+    <div>
+      <table class="compare-table">
+        <thead><tr><th></th><th>AIS / PortWatch</th><th>Narrows</th></tr></thead>
+        <tbody>
+          <tr><td>Unit of output</td><td>Metric tons, transit counts</td><td>USD by country &amp; commodity</td></tr>
+          <tr><td>Unit of analysis</td><td>Chokepoint throughput</td><td>Country × corridor × commodity</td></tr>
+          <tr><td>Forward-looking</td><td>Historical monitoring</td><td>User-defined scenarios</td></tr>
+          <tr><td>Assumptions</td><td>Fixed methodology</td><td>All parameters substitutable</td></tr>
+          <tr><td>Primary user</td><td>Policymakers, economists</td><td>Underwriters, traders, lenders</td></tr>
+          <tr><td>Rerouting cost</td><td>Not modelled</td><td>By vessel class &amp; audience</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE MOMENT -->
+<section class="live-moment">
+  <div class="live-inner">
+    <div>
+      <div class="live-tag">Live context</div>
+      <h2 class="live-title">The Strait of Hormuz has been effectively closed since February 2026.</h2>
+      <p class="live-body">Iran began charging <strong>over $1 million per vessel</strong> to transit the strait. 230 loaded oil tankers waited at anchor inside the Gulf. Indonesia's finance minister just floated a <strong>Malacca toll</strong> in direct response. Thailand is fast-tracking a $31 billion land bridge.</p>
+      <p class="live-body">The question of which economies depend on which corridors — and what that dependency costs when tested — is no longer theoretical.</p>
+      <a href="#contact" class="btn btn-gold">See the Malacca exposure analysis</a>
+    </div>
+    <div class="live-stats">
+      <div class="live-stat">
+        <div class="live-stat-value">82%</div>
+        <div class="live-stat-desc"><strong>Japan's iron ore imports</strong>routed through Malacca. Capesize bulk carriers. No clean VLCC-equivalent alternative.</div>
+      </div>
+      <div class="live-stat">
+        <div class="live-stat-value">$8.9B</div>
+        <div class="live-stat-desc"><strong>Value at risk — Malacca 100% / 14 days</strong>Across 15 countries. Before rerouting costs.</div>
+      </div>
+      <div class="live-stat">
+        <div class="live-stat-value">72%</div>
+        <div class="live-stat-desc"><strong>China's seaborne crude</strong>transits Hormuz. Capacity sensitivity: 1.00. No alternative for laden VLCCs.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- FOR WHOM -->
+<section id="for-whom">
+  <div class="wrap">
+    <div class="eyebrow">Who uses Narrows</div>
+    <h2 class="section-title">Built for the people whose decisions depend on getting the number right.</h2>
+    <p class="section-lead">Every output is designed to connect to a specific professional question — not to inform generally, but to be actionable immediately.</p>
+    <div class="audience-grid">
+      <div class="aud-card fade-up">
+        <div class="aud-role">P&amp;I clubs · Reinsurers</div>
+        <h3 class="aud-title">Accumulation underwriters</h3>
+        <p class="aud-body">Your accumulation model tracks hull. Narrows adds the cargo dependency layer — which commodities, from which origins, through which corridors, at what bilateral dependency percentage. The fleet-at-risk output is your number.</p>
+        <span class="aud-num">Hormuz 30d: 28 VLCCs in-window · $3.4B cargo at risk</span>
+      </div>
+      <div class="aud-card fade-up">
+        <div class="aud-role">Glencore · Trafigura · Vitol · Gunvor</div>
+        <h3 class="aud-title">Commodity trading desks</h3>
+        <p class="aud-body">A crude desk with open positions through Hormuz needs the rerouting cost and delivery delay before pricing the risk into a contract. That's not a tail risk — it's a live pricing input.</p>
+        <span class="aud-num">Malacca closure: +4 days · $800k voyage overrun per Capesize</span>
+      </div>
+      <div class="aud-card fade-up">
+        <div class="aud-role">Banks · ECAs · Infrastructure lenders</div>
+        <h3 class="aud-title">Project finance teams</h3>
+        <p class="aud-body">Voyage cost overrun and carrying cost outputs map directly to debt service coverage analysis. Model what a corridor disruption does to freight assumptions in a 15-year financing structure.</p>
+        <span class="aud-num">Suez 14d: $1.4M voyage overrun · 5% p.a. carrying cost basis</span>
+      </div>
+      <div class="aud-card fade-up">
+        <div class="aud-role">Industrials · Energy majors · Large importers</div>
+        <h3 class="aud-title">Supply chain risk managers</h3>
+        <p class="aud-body">Understand your raw material dependency on specific maritime corridors before the disruption, not during it. The bilateral dependency percentage is likely new information.</p>
+        <span class="aud-num">South Korea: 78% iron ore via Malacca · 65% crude via Hormuz</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- CTA -->
+<section id="contact">
+  <div class="cta-section">
+    <h2 class="cta-title">Every assumption in the model is a <em>conversation</em>, not a constraint.</h2>
+    <p class="cta-sub">If your view of bypass capacity differs from our default, that is a one-parameter change. Request a demo and we will run your scenario in front of you.</p>
+    <div class="cta-form">
+      <input type="email" class="cta-input" placeholder="your@organisation.com" id="demo-email">
+      <button class="btn btn-blue" onclick="handleDemoRequest()">Request demo</button>
+    </div>
+    <p class="cta-note">No sales funnel. A person will reply.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a href="/" class="footer-logo">
+        <svg class="footer-logo-mark" viewBox="0 0 1698 948" xmlns="http://www.w3.org/2000/svg"><path d="M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z"/></svg>
+        <span class="footer-logo-word">NARROWS</span>
+      </a>
+      <p class="footer-tagline">Trade risk intelligence.<br>When a chokepoint closes,<br>who's exposed and by how much?</p>
+    </div>
+    <div>
+      <div class="footer-col-label">The model</div>
+      <ul class="footer-col-links">
+        <li><a href="#how-it-works">What it produces</a></li>
+        <li><a href="#for-whom">Who uses it</a></li>
+        <li><a href="mailto:fysh@narrows.io">Request architecture document</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-label">Contact</div>
+      <ul class="footer-col-links">
+        <li><a href="mailto:fysh@narrows.io">fysh@narrows.io</a></li>
+        <li><a href="#contact">Request a demo</a></li>
+        <li><a href="mailto:fysh@narrows.io?subject=Press inquiry — Narrows">Press</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Narrows. All rights reserved.</span>
+    <span>Geneva · narrows.io</span>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+function handleDemoRequest() {
+  const input = document.getElementById('demo-email');
+  const email = input.value.trim();
+  if (!email || !email.includes('@')) {
+    input.style.borderColor = '#e74c3c';
+    input.style.boxShadow = '0 0 0 3px rgba(231,76,60,0.15)';
+    setTimeout(() => { input.style.borderColor = ''; input.style.boxShadow = ''; }, 1600);
+    return;
+  }
+  window.location.href = `mailto:fysh@narrows.io?subject=Demo request — Narrows&body=Request from: ${email}%0A%0AOrganisation:%0ARole:%0APrimary chokepoint of interest:`;
+}
+document.getElementById('demo-email').addEventListener('keydown', e => { if (e.key === 'Enter') handleDemoRequest(); });
+
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  navLinks.forEach(a => { a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--navy)' : ''; });
+}, { passive: true });
+</script>
+</body>
+</html>
