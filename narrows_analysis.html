@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Narrows — Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1698 948'%3E%3Crect width='1698' height='948' fill='%230A2540'/%3E%3Cpath fill='%23F0B429' d='M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z'/%3E%3C/svg%3E">
+
+<style>
+:root {
+  --white:          #FFFFFF;
+  --page-bg:        #FFFFFF;
+  --surface:        #F6F8FB;
+  --border:         #E4EAF2;
+  --navy:           #0A2540;
+  --blue:           #1565A8;
+  --blue-pale:      #EAF3FB;
+  --gold:           #F0B429;
+  --gold-dark:      #dea020;
+  --gold-pale:      #FEF9EC;
+  --text-primary:   #0A2540;
+  --text-secondary: #4A6078;
+  --text-tertiary:  #8FA5BB;
+  --font: 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
+  --rule-light: 1px solid var(--border);
+  --max-w: 860px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--page-bg);
+  color:var(--text-primary);
+  font-family:var(--font);
+  font-weight:300;
+  font-size:15px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── HEADER ── */
+.n-header{
+  background:var(--navy);
+  padding:0 28px;
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:2px solid var(--gold);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.n-logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;}
+.n-logo-mark{width:22px;height:auto;display:block;}
+.n-logo-mark path{fill:var(--white);}
+.n-logo-word{font-size:14px;font-weight:700;color:var(--white);letter-spacing:0.1em;text-transform:uppercase;}
+.n-header-right{display:flex;align-items:center;gap:28px;}
+.n-nav{display:flex;align-items:center;gap:4px;}
+.n-nav-link{
+  font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  color:rgba(255,255,255,0.55);text-decoration:none;
+  padding:6px 12px;border-radius:4px;
+  transition:color 0.15s, background 0.15s;
+}
+.n-nav-link:hover{color:var(--white);background:rgba(255,255,255,0.07);}
+.n-nav-link.active{color:var(--gold);}
+.n-header-cta{
+  font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--navy);background:var(--gold);padding:7px 16px;border-radius:4px;
+  text-decoration:none;transition:background 0.15s;
+}
+.n-header-cta:hover{background:var(--gold-dark);}
+
+/* ── PAGE HEADER ── */
+.page-header{
+  border-bottom:var(--rule-light);
+  padding:48px 28px 36px;
+  background:var(--white);
+}
+.page-header-inner{max-width:var(--max-w);margin:0 auto;}
+.page-header-eyebrow{
+  font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gold-dark);margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.page-header-eyebrow::before{content:'';display:block;width:16px;height:2px;background:var(--gold);}
+.page-header-title{
+  font-size:clamp(24px,3.5vw,36px);font-weight:700;color:var(--navy);
+  letter-spacing:-0.02em;line-height:1.15;margin-bottom:12px;
+}
+.page-header-sub{
+  font-size:14px;color:var(--text-secondary);max-width:560px;line-height:1.7;
+}
+
+/* ── FILTER BAR ── */
+.filter-bar{
+  background:var(--surface);
+  border-bottom:var(--rule-light);
+  padding:0 28px;
+}
+.filter-bar-inner{
+  max-width:var(--max-w);margin:0 auto;
+  display:flex;align-items:center;gap:0;
+  overflow-x:auto;
+}
+.filter-btn{
+  font-size:10px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;
+  color:var(--text-tertiary);padding:14px 16px;
+  border:none;background:none;cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:color 0.15s, border-color 0.15s;
+  white-space:nowrap;
+}
+.filter-btn:hover{color:var(--text-primary);}
+.filter-btn.active{color:var(--navy);border-bottom-color:var(--gold);}
+.filter-count{
+  display:inline-block;
+  background:var(--border);color:var(--text-tertiary);
+  font-size:9px;font-weight:700;
+  padding:1px 6px;border-radius:10px;margin-left:6px;
+  vertical-align:middle;
+}
+.filter-btn.active .filter-count{background:var(--gold-pale);color:var(--gold-dark);}
+
+/* ── ENTRY LIST ── */
+.entry-list{
+  max-width:var(--max-w);margin:0 auto;
+  padding:0 28px 80px;
+}
+
+/* ── FEATURED ENTRY ── */
+.entry-featured{
+  display:grid;
+  grid-template-columns:1fr 280px;
+  gap:0;
+  border:var(--rule-light);
+  border-radius:8px;
+  margin-top:36px;
+  margin-bottom:12px;
+  overflow:hidden;
+  text-decoration:none;
+  transition:box-shadow 0.2s;
+}
+.entry-featured:hover{box-shadow:0 4px 24px rgba(10,37,64,0.10);}
+.entry-featured-body{padding:32px;}
+.entry-featured-meta{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.entry-featured-label{
+  font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--white);background:var(--navy);
+  padding:3px 10px;border-radius:3px;
+}
+.entry-featured-date{
+  font-size:10px;color:var(--text-tertiary);letter-spacing:0.04em;
+}
+.entry-featured-title{
+  font-size:clamp(17px,2.2vw,22px);font-weight:700;color:var(--navy);
+  letter-spacing:-0.02em;line-height:1.25;margin-bottom:10px;
+}
+.entry-featured-title em{font-style:italic;font-weight:400;color:var(--blue);}
+.entry-featured-desc{
+  font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:18px;
+}
+.entry-featured-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.tag{
+  font-size:9px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--blue);background:var(--blue-pale);
+  padding:3px 10px;border-radius:3px;
+}
+.entry-featured-stat{
+  background:var(--navy);
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  padding:32px 28px;
+  border-left:var(--rule-light);
+}
+.entry-stat-label{
+  font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);margin-bottom:8px;
+}
+.entry-stat-value{
+  font-size:clamp(28px,3.5vw,40px);font-weight:700;color:var(--gold);
+  letter-spacing:-0.02em;line-height:1;margin-bottom:6px;
+}
+.entry-stat-context{
+  font-size:11px;color:rgba(255,255,255,0.5);line-height:1.5;
+}
+.entry-read-more{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--blue);margin-top:20px;
+}
+.entry-read-more::after{content:'→';font-size:12px;}
+
+/* ── STANDARD ENTRY ROW ── */
+.entry-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:start;
+  gap:24px;
+  padding:24px 0;
+  border-bottom:var(--rule-light);
+  text-decoration:none;
+  transition:background 0.15s;
+  border-radius:4px;
+  margin:0 -12px;
+  padding-left:12px;
+  padding-right:12px;
+}
+.entry-row:last-child{border-bottom:none;}
+.entry-row:hover{background:var(--surface);}
+.entry-row-meta{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin-bottom:6px;
+}
+.entry-row-date{font-size:10px;color:var(--text-tertiary);letter-spacing:0.04em;}
+.entry-row-title{
+  font-size:15px;font-weight:700;color:var(--navy);
+  letter-spacing:-0.01em;line-height:1.3;margin-bottom:6px;
+}
+.entry-row-title em{font-style:italic;font-weight:400;color:var(--blue);}
+.entry-row-desc{font-size:12px;color:var(--text-secondary);line-height:1.6;margin-bottom:10px;max-width:560px;}
+.entry-row-stat{
+  flex-shrink:0;text-align:right;
+  padding:12px 16px;
+  background:var(--surface);border:var(--rule-light);border-radius:6px;
+  min-width:120px;
+}
+.entry-row-stat-label{font-size:8px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:4px;}
+.entry-row-stat-value{font-size:18px;font-weight:700;color:var(--navy);letter-spacing:-0.01em;line-height:1;}
+.entry-row-stat-context{font-size:10px;color:var(--text-tertiary);margin-top:2px;}
+
+/* ── SECTION DIVIDER ── */
+.list-section-label{
+  font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--text-tertiary);
+  padding:24px 0 8px;
+  border-bottom:var(--rule-light);
+  margin-bottom:0;
+  display:flex;align-items:center;gap:12px;
+}
+.list-section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* ── EMPTY STATE ── */
+.empty-state{
+  text-align:center;padding:64px 28px;color:var(--text-tertiary);
+}
+.empty-state-title{font-size:15px;font-weight:600;color:var(--text-secondary);margin-bottom:8px;}
+.empty-state-sub{font-size:13px;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .entry-featured{grid-template-columns:1fr;}
+  .entry-featured-stat{border-left:none;border-top:var(--rule-light);}
+  .entry-row{grid-template-columns:1fr;}
+  .entry-row-stat{display:none;}
+  .n-nav{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="n-header">
+  <a href="index.html" class="n-logo">
+    <svg class="n-logo-mark" viewBox="0 0 1698 948" xmlns="http://www.w3.org/2000/svg">
+      <path d="M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z"/>
+    </svg>
+    <span class="n-logo-word">Narrows</span>
+  </a>
+  <div class="n-header-right">
+    <nav class="n-nav">
+      <a href="index.html" class="n-nav-link">Home</a>
+      <a href="narrows_analysis.html" class="n-nav-link active">Analysis</a>
+      <a href="narrows_simulator.html" class="n-nav-link">Simulator</a>
+    </nav>
+    <a href="mailto:fysh@narrows.io" class="n-header-cta">Request demo</a>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-header-eyebrow">Narrows Analysis</div>
+    <h1 class="page-header-title">Chokepoint exposure,<br>quantified.</h1>
+    <p class="page-header-sub">
+      Model-derived analysis of maritime trade dependencies. Each piece starts with a live question and ends with a specific number — the kind that belongs in a risk model, not a news summary.
+    </p>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-bar-inner">
+    <button class="filter-btn active" onclick="filterEntries('all', this)">
+      All <span class="filter-count">2</span>
+    </button>
+    <button class="filter-btn" onclick="filterEntries('malacca', this)">
+      Malacca <span class="filter-count">1</span>
+    </button>
+    <button class="filter-btn" onclick="filterEntries('kra', this)">
+      Kra / Southeast Asia <span class="filter-count">1</span>
+    </button>
+    <button class="filter-btn" onclick="filterEntries('iron-ore', this)">
+      Iron ore <span class="filter-count">1</span>
+    </button>
+    <button class="filter-btn" onclick="filterEntries('crude', this)">
+      Crude petroleum <span class="filter-count">1</span>
+    </button>
+  </div>
+</div>
+
+<!-- ENTRY LIST -->
+<div class="entry-list">
+
+  <!-- FEATURED — most recent -->
+  <a href="narrows_kra_analysis.html" class="entry-featured" data-tags="kra iron-ore crude malacca">
+    <div class="entry-featured-body">
+      <div class="entry-featured-meta">
+        <span class="entry-featured-label">Latest</span>
+        <span class="entry-featured-date">April 2026</span>
+      </div>
+      <div class="entry-featured-title">
+        The Kra Land Bridge is a $31 billion question<br>with a <em>$1.4 million answer.</em>
+      </div>
+      <div class="entry-featured-desc">
+        Thailand is fast-tracking a land bridge across the Kra Isthmus as an alternative to Malacca. The geopolitical logic is real. For Capesize iron ore and VLCC crude — the commodity classes that actually drive Malacca's bulk tonnage — the commercial case is not. The Narrows model runs the double-handling economics vessel by vessel.
+      </div>
+      <div class="entry-featured-tags">
+        <span class="tag">Kra Isthmus</span>
+        <span class="tag">Malacca</span>
+        <span class="tag">Iron ore</span>
+        <span class="tag">Crude petroleum</span>
+        <span class="tag">Japan · South Korea</span>
+      </div>
+      <div class="entry-read-more">Read analysis</div>
+    </div>
+    <div class="entry-featured-stat">
+      <div class="entry-stat-label">Land bridge vs. Lombok — Capesize premium</div>
+      <div class="entry-stat-value">+$900k</div>
+      <div class="entry-stat-context">per voyage extra cost<br>over the sea alternative</div>
+    </div>
+  </a>
+
+  <!-- SECTION LABEL -->
+  <div class="list-section-label">Earlier analysis</div>
+
+  <!-- ENTRY ROW -->
+  <a href="narrows_malacca_analysis.html" class="entry-row" data-tags="malacca crude iron-ore">
+    <div>
+      <div class="entry-row-meta">
+        <span class="entry-featured-date">April 2026</span>
+        <span class="tag">Malacca</span>
+        <span class="tag">Toll scenario</span>
+        <span class="tag">Indonesia</span>
+      </div>
+      <div class="entry-row-title">
+        The Malacca toll question has a number. <em>Here it is.</em>
+      </div>
+      <div class="entry-row-desc">
+        Indonesia floated a Malacca transit toll in response to the Hormuz closure, then walked it back. The question is now live. What would a toll actually cost — by vessel class, by commodity, by importer — and at what price does diversion via Lombok or Sunda become rational?
+      </div>
+      <div class="entry-featured-tags">
+        <span class="tag">Malacca</span>
+        <span class="tag">Crude petroleum</span>
+        <span class="tag">Iron ore</span>
+        <span class="tag">China · Japan · South Korea</span>
+      </div>
+    </div>
+    <div class="entry-row-stat">
+      <div class="entry-row-stat-label">14-day VAR</div>
+      <div class="entry-row-stat-value">$8.9B</div>
+      <div class="entry-row-stat-context">all commodities<br>15 countries</div>
+    </div>
+  </a>
+
+</div>
+
+<script>
+// Filter logic — hides entries that don't match the selected tag
+function filterEntries(tag, btn) {
+  // Update active button
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const featured = document.querySelector('.entry-featured');
+  const rows = document.querySelectorAll('.entry-row');
+  const sectionLabel = document.querySelector('.list-section-label');
+
+  if (tag === 'all') {
+    if (featured) featured.style.display = '';
+    rows.forEach(r => r.style.display = '');
+    if (sectionLabel) sectionLabel.style.display = '';
+    return;
+  }
+
+  // Featured entry
+  if (featured) {
+    const tags = (featured.dataset.tags || '').split(' ');
+    featured.style.display = tags.includes(tag) ? '' : 'none';
+  }
+
+  // Row entries
+  let visibleRows = 0;
+  rows.forEach(r => {
+    const tags = (r.dataset.tags || '').split(' ');
+    const show = tags.includes(tag);
+    r.style.display = show ? '' : 'none';
+    if (show) visibleRows++;
+  });
+
+  // Hide section label if no rows visible
+  if (sectionLabel) {
+    sectionLabel.style.display = visibleRows > 0 ? '' : 'none';
+  }
+}
+</script>
+
+</body>
+</html>
